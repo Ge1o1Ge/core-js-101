@@ -176,10 +176,12 @@ const cssSelectorBuilder = {
   },
 
   combine(selector1, combinator, selector2) {
-    this.build = selector1.build;
+    let i = 0;
+    while (selector2.length > i) {
+      this.build = this.build.prevEl;
+      i += 1;
+    }
     this.build.combinator = combinator;
-    this.build.nextEl = new MyElement();
-    this.build.nextEl.build = selector2.build;
     return this;
   },
 
